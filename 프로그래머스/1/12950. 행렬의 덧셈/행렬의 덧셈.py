@@ -1,8 +1,8 @@
 def solution(arr1, arr2):
-    answer = [[]]
+    
+    # 방법 1. for문 2개 이용
     outer = []
     inner = []
-    
     for i in range(len(arr1)):
         for j in range(len(arr1[i])):
             inner.append(arr1[i][j] + arr2[i][j])
@@ -10,6 +10,6 @@ def solution(arr1, arr2):
         inner = []
     return outer
     
-    # print(list(map(lambda x: list(map(lambda y: arr1[x][y] + arr2[x][y], range(len(arr1[x])),range(len(arr1)))))))
+    # 방법 2. zip 활용 phythonic하게 구현
+    return [[i+j for i, j in zip(x,y)] for x, y in zip(arr1, arr2)]
     
-    return answer
