@@ -8,8 +8,11 @@ def solution(arr1, arr2):
             inner.append(arr1[i][j] + arr2[i][j])
         outer.append(inner)
         inner = []
-    return outer
+    # return outer
     
     # 방법 2. zip 활용 phythonic하게 구현
-    return [[i+j for i, j in zip(x,y)] for x, y in zip(arr1, arr2)]
+    # return [[i+j for i, j in zip(x,y)] for x, y in zip(arr1, arr2)]
+
+    # 방법 3. 튜플 언패킹 이용
+    return [list(map(sum, zip(*x))) for x in zip(arr1, arr2)]
     
