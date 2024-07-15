@@ -20,14 +20,14 @@ int main(){
     for(int i=0; i<N-1; i++){
         for(int j=0; j<N-i-1; j++){
             if(nums[j] > nums[j+1]){
-                // int replace_num = nums[j+1];
-                int replace_num = nums[j];
-                nums[j] = nums[j+1];
-                nums[j+1] = replace_num;
-                // nums[j+1] = nums[j];
-                // nums[j] = replace_num;
+                // int replace_num = nums[j];
+                // nums[j] = nums[j+1];
+                // nums[j+1] = replace_num;
+
+                int replace_num = nums[j+1];
+                nums[j+1] = nums[j];
+                nums[j] = replace_num;
             }
-            // cout << "j : " << j;
         }
     }
 
