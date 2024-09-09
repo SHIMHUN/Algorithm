@@ -5,6 +5,10 @@ public class Solution {
         Scanner sc = new Scanner(System.in);
         String a = sc.next();
         String b = sc.next();
-        System.out.printf("%s%s", a, b);
+        // String c = a.concat(b);
+        System.out.printf("%s%s\n", a, b);
+        // System.out.println(a + b);
+        // System.out.print(c);
+
     }
 }
