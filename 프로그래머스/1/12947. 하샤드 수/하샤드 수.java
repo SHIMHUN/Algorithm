@@ -7,10 +7,6 @@ class Solution {
             result += num;
         }
         
-        System.out.println(result);
-        if(x % result == 0){
-            return true;
-        }
-        return false;
+        return x % result == 0;
     }
 }
