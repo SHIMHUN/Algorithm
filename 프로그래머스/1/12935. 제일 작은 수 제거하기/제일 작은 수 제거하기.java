@@ -17,10 +17,9 @@ class Solution {
         }
         
         // for(int i=0; i<arr.length-1; i++){
-        //     if(idx == i){
-        //         continue;
+        //     if(idx != i){
+        //         answer[i] = arr[i];
         //     }
-        //     answer[i] = arr[i];
         // }
         
         int j = 0; // answer 배열의 인덱스
