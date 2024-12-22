@@ -1,3 +1,6 @@
+import java.util.*;
+// import java.util.Arrays;
+
 class Solution {
     public String solution(String s) {
         String[] str = s.split(" ");    
@@ -22,7 +25,12 @@ class Solution {
             }
         }
         
-        return min + " " + max;
+        Arrays.sort(nums);
+        System.out.println(nums[0]);
+        System.out.println(nums[nums.length - 1]);
+        
+        return nums[0] + " " + nums[nums.length-1];
+        // return min + " " + max;
         
         // Arrays.sort(nums);
         
