@@ -1,10 +1,10 @@
 # [level 0] 이어 붙인 수 - 181928 
 
-[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181928?language=java) 
+[문제 링크](https://school.programmers.co.kr/learn/courses/30/lessons/181928) 
 
 ### 성능 요약
 
-메모리: 73.8 MB, 시간: 20.06 ms
+메모리: 79.1 MB, 시간: 13.71 ms
 
 ### 구분
 
@@ -16,7 +16,7 @@
 
 ### 제출 일자
 
-2024년 12월 27일 02:13:17
+2024년 12월 27일 02:16:48
 
 ### 문제 설명
 

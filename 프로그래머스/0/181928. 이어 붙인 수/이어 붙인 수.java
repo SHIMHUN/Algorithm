@@ -13,9 +13,8 @@ class Solution {
                 even_str += num;
         
             }
+            // ((num % 2 != 0) ? odd_str : even_str)+=num;
         }
         return Integer.parseInt(odd_str) + Integer.parseInt(even_str);
-        
-        // return answer;
     }
 }
