@@ -5,7 +5,6 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-//        int n = scanner.nextInt();
         int[] arr = new int[31];
 
         for(int i=1; i<31; i++){
@@ -16,10 +15,6 @@ public class Main {
             int num = scanner.nextInt();
             arr[num] = num;
         }
-
-//        for(int i=1; i<31; i++){
-//            System.out.println(arr[i]);
-//        }
 
         int a = 0;
         int b = 0;
