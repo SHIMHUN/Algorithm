@@ -5,13 +5,13 @@ import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
-//        int n = scanner.nextInt();
+        StringBuilder sb = new StringBuilder(); // 출력 최적화를 위한 StringBuilder
+
         int n = Integer.parseInt(scanner.nextLine());
         for(int i=0; i<n; i++){
-//            int cnt = scanner.nextInt();
             int cnt = Integer.parseInt(scanner.nextLine());
-            int max = -1000000;
-            int min = 1000000;
+            int max = Integer.MIN_VALUE;
+            int min = Integer.MAX_VALUE;
             String s = scanner.nextLine();
             String[] nums = s.split(" ");
 
@@ -24,7 +24,8 @@ public class Main {
                     min = num;
                 }
             }
-            System.out.println(min + " " + max);
+            sb.append(min).append(" ").append(max).append("\n");
         }
+        System.out.println(sb.toString());
     }
 }
