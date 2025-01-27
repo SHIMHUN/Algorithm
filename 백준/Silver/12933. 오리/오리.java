@@ -9,20 +9,19 @@ public class Main {
         String s = reader.readLine();
         int length = s.length();
 
-        boolean[] visited = new boolean[length]; // 문자의 처리 여부를 기록
+        boolean[] visited = new boolean[length]; //모든 루프에서 방문 여부를 체크하여 건너뛸지를 결정
         int result = 0;
 
         for (int i = 0; i < length; i++) {
-            if (!visited[i] && s.charAt(i) == 'q') { // 아직 처리되지 않은 'q'를 만났을 때
-                if (!findQuack(i, s, visited)) { // 잘못된 입력이면 -1
+            if (!visited[i] && s.charAt(i) == 'q') { // 아직 처리되지 않은 q
+                if (!findQuack(i, s, visited)) { // 입력순서 잘못됐으면 -1 리턴
                     result = -1;
                     break;
                 }
-                result++; // 한 마리의 오리를 처리
+                result++;
             }
         }
-
-        // 모든 문자가 처리되었는지 확인
+        
         for (int i = 0; i < length; i++) {
             if (!visited[i]) {
                 result = -1;
@@ -37,22 +36,21 @@ public class Main {
 
     public static boolean findQuack(int idx, String s, boolean[] visited) {
         String quack = "quack";
-        int quackIdx = 0;
+        int quack_idx = 0;
 
         for (int i = idx; i < s.length(); i++) {
             if (visited[i]) continue; // 이미 처리된 문자는 건너뜀
 
-            if (s.charAt(i) == quack.charAt(quackIdx)) { // 현재 단계와 일치하는 문자
+            if (s.charAt(i) == quack.charAt(quack_idx)) { // 현재 단계와 일치하는 문자
                 visited[i] = true; // 해당 문자를 처리 완료로 표시
-                quackIdx++;
+                quack_idx++;
 
-                if (quackIdx == 5) { // "quack"을 완성하면 초기화
-                    quackIdx = 0;
+                if (quack_idx == 5) { // "quack"을 완성하면 초기화
+                    quack_idx = 0;
                 }
             }
         }
-
-        // "quack"이 완전히 매칭되지 못한 경우
-        return quackIdx == 0;
+        
+        return quack_idx == 0; //단어가 완성되지 못하여 idx가 1 이상일때 실패
     }
 }
