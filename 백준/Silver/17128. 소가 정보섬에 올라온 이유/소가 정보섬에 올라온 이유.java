@@ -2,75 +2,74 @@ import java.io.*;
 import java.util.Arrays;
 
 public class Main {
-    static int[] A;
-    static int N;
-    static int S; // 전체 합을 저장하는 변수
+    static int[] A, DP; // 소의 품질 점수와 DP 배열
+    static int N;       // 소의 수
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
 
+        // 입력 받기
         String[] NnQ = br.readLine().split(" ");
-        N = Integer.parseInt(NnQ[0]);
-        int Q = Integer.parseInt(NnQ[1]);
+        N = Integer.parseInt(NnQ[0]); // 소의 수
+        int Q = Integer.parseInt(NnQ[1]); // 쿼리 수
 
+        // 품질 점수 배열 입력
         A = Arrays.stream(br.readLine().split(" "))
                 .mapToInt(Integer::parseInt)
                 .toArray();
 
-        int[] modify_A = Arrays.stream(br.readLine().split(" "))
+        // 수정할 소의 번호 입력
+        int[] modifyA = Arrays.stream(br.readLine().split(" "))
                 .mapToInt(Integer::parseInt)
                 .toArray();
 
-        // 초기 합계 계산
-        S = calcInitialSum();
+        // DP 배열 초기화 및 S값 계산
+        DP = new int[N];
+        int S = 0;
 
+        for (int i = 0; i < N; i++) {
+            DP[i] = calculateProduct(i); // 초기 DP 값 계산
+            S += DP[i];                 // 초기 S 값 계산
+        }
+
+        // 쿼리 처리
         for (int i = 0; i < Q; i++) {
-            int idx = modify_A[i] - 1; // 1-based index to 0-based
-            updateSum(idx); // 값 변경에 따른 합계 업데이트
-            bw.write(S + "\n"); // 결과 출력
+            int index = modifyA[i] - 1; // 입력은 1-based, 배열은 0-based
+            S = update(index, S);      // S 값 갱신
+            bw.write(S + "\n");        // 결과 출력
         }
 
         bw.flush();
         bw.close();
     }
 
-    // 초기 합계 계산 (O(N))
-    public static int calcInitialSum() {
-        int totalSum = 0;
-        for (int i = 0; i < N; i++) {
-            int mid_sum = 1;
-            for (int j = 0; j < 4; j++) {
-                mid_sum *= A[(i + j) % N];
-            }
-            totalSum += mid_sum;
+    /**
+     * 특정 인덱스에서 시작하는 4개의 원소의 곱 계산
+     */
+    public static int calculateProduct(int i) {
+        int product = 1;
+        for (int j = 0; j < 4; j++) {
+            product *= A[(i + j) % N];
         }
-        return totalSum;
+        return product;
     }
 
-    // 합계 업데이트 (O(1))
-    public static void updateSum(int idx) {
-        // 변경 전의 영향을 제거
-        for (int j = 0; j < 4; j++) {
-            int startIdx = (idx - j + N) % N; // 순환 인덱스 처리
-            int mid_sum = 1;
-            for (int k = 0; k < 4; k++) {
-                mid_sum *= A[(startIdx + k) % N];
-            }
-            S -= mid_sum; // 기존 값을 제거
-        }
-
-        // 값 변경
+    /**
+     * 특정 인덱스가 변경될 때 S와 DP 배열 갱신
+     */
+    public static int update(int idx, int currentSum) {
+        // A[idx] 값 반전
         A[idx] *= -1;
 
-        // 변경 후의 영향을 추가
-        for (int j = 0; j < 4; j++) {
-            int startIdx = (idx - j + N) % N; // 순환 인덱스 처리
-            int mid_sum = 1;
-            for (int k = 0; k < 4; k++) {
-                mid_sum *= A[(startIdx + k) % N];
-            }
-            S += mid_sum; // 새로운 값을 추가
+        // 변경된 인덱스와 관련된 DP 값 업데이트
+        for (int i = 0; i < 4; i++) {
+            int affectedIdx = (idx - i + N) % N; // 순환하는 인덱스 계산
+            currentSum -= DP[affectedIdx];      // 기존 값 제거
+            DP[affectedIdx] = calculateProduct(affectedIdx); // DP를 새로 계산하여 저장
+            currentSum += DP[affectedIdx];      // 갱신된 값 추가
         }
+
+        return currentSum;
     }
 }
