@@ -1,46 +1,44 @@
 import java.io.*;
 
 public class Main {
-    static boolean[] visited; // 방문 여부 체크
-    static String input; // 입력 문자열
+    static boolean[] visited;
+    static String input;
     static BufferedWriter bw;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         bw = new BufferedWriter(new OutputStreamWriter(System.out));
         input = br.readLine();
-        visited = new boolean[input.length()]; // 방문 여부 배열 초기화
 
-        // 처음 전체 문자열 영역에 대해 재귀 호출
+        visited = new boolean[input.length()]; // 방문 여부
+
         solve(0, input.length() - 1);
 
         bw.flush();
         bw.close();
-//        br.close();
     }
 
-    // start부터 end까지의 범위에서 처리
     public static void solve(int start, int end) throws IOException {
-//        if (start > end) return; // 재귀 종료 조건
 
         int minCharIndex = -1; // 가장 작은 문자의 인덱스
         char minChar = 'Z' + 1; // 가장 작은 문자
 
-        // 현재 범위에서 가장 작은 문자 탐색
+        //구간 내 가장 작은 문자 탐색
         for (int i = start; i <= end; i++) {
-            if (!visited[i] && input.charAt(i) < minChar) {
-                minChar = input.charAt(i);
+            char c = input.charAt(i);
+            if (!visited[i] && c < minChar) {
+                minChar = c;
                 minCharIndex = i;
             }
         }
 
-        if (minCharIndex == -1) return; // 탐색 실패 시 종료
+        if (minCharIndex == -1) return; //구간 내 가장 작은 문자가 더이상 없으면 종료
 
-        // 가장 작은 문자를 방문 처리하고 출력
+        // 가장 작은 문자를 방문 처리
         visited[minCharIndex] = true;
         for (int i = 0; i < input.length(); i++) {
             if (visited[i]) {
-                bw.write(input.charAt(i));
+                bw.write(input.charAt(i)); //방문한 문자 전부 출력
             }
         }
         bw.write("\n");
