@@ -15,8 +15,10 @@ public class Main {
             int W = input[1];
             int N = input[2];
 
-            int roomNum = (N%H == 0)? N/H : N/H + 1;
-            int floor = (N%H == 0)? H : N%H;
+//            int roomNum = (N%H == 0)? N/H : N/H + 1; //
+//            int floor = (N%H == 0)? H : N%H;
+            
+            int roomNum, floor;
 
             if(N%H == 0){
                 roomNum = N/H;
