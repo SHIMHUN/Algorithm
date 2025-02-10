@@ -1,24 +1,21 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 public class Main {
-
     static int[][] arr;
     static int[] dx = {0, 1, 0, -1}; // 오른쪽, 아래, 왼쪽, 위
     static int[] dy = {1, 0, -1, 0};
-    static int minNum;
 
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-
+        StringBuilder sb = new StringBuilder();
+        
         String[] input = br.readLine().split(" ");
         int N = Integer.parseInt(input[0]);
         int M = Integer.parseInt(input[1]);
         int R = Integer.parseInt(input[2]);
+
         arr = new int[N][M];
 
-        // 배열 입력 받기
         for (int i = 0; i < N; i++) {
             String[] row = br.readLine().split(" ");
             for (int j = 0; j < M; j++) {
@@ -26,86 +23,53 @@ public class Main {
             }
         }
 
-        // 최소 회전 그룹의 수
-        minNum = Math.min(N, M) / 2;
+        int layers = Math.min(N, M) / 2; 
 
-        // 각 그룹별 회전 수행
-        for (int t = 0; t < minNum; t++) {
-            // 그룹별 한 바퀴 길이 계산
-            int perimeter = 2 * ((N - 2 * t) + (M - 2 * t) - 2);
+        for (int t = 0; t < layers; t++) {
+            //각 레이어마다 회전해야할 수를 구하고 회전 함수 실행
+            int count = 2 * ((N - 2 * t) + (M - 2 * t) - 2); 
+            int rotations = R % count; 
 
-            // 실제 회전 횟수 최적화
-            int rotationCount = R % perimeter;
-
-            // 그룹 회전
-            rotateGroup(t, rotationCount, N, M);
-        }
-
-        // 결과 출력
-        for (int i = 0; i < N; i++) {
-            for (int j = 0; j < M; j++) {
-                System.out.print(arr[i][j] + " ");
+            for (int r = 0; r < rotations; r++) {
+                rotateLayer(t, N, M); 
             }
-            System.out.println();
         }
+
+       
+        for (int[] row : arr) {
+            for (int num : row) {
+                sb.append(num).append(" ");
+//                System.out.print(num + " ");
+            }
+            sb.append("\n");
+//            System.out.println();
+        }
+        
+        System.out.println(sb.toString());
     }
 
-    // 특정 그룹 회전
-    static void rotateGroup(int t, int rotationCount, int N, int M) {
-        int perimeter = 2 * ((N - 2 * t) + (M - 2 * t) - 2);
-
-        // 그룹 값을 배열에 저장
-        int[] group = new int[perimeter];
-        int idx = 0;
-
+    static void rotateLayer(int t, int N, int M) {
         int x = t;
         int y = t;
+        int temp = arr[x][y]; // 시작 위치 값 저장
 
-        // 그룹의 값 추출
         int direction = 0;
-        while (idx < perimeter) {
-            group[idx++] = arr[x][y];
 
+        while (direction < 4) {
             int nx = x + dx[direction];
             int ny = y + dy[direction];
 
-            // 범위를 벗어나면 방향 전환
-            if (nx < t || nx >= N - t || ny < t || ny >= M - t) {
+            // 범위 체크
+            if (nx < t || ny < t || nx >= N - t || ny >= M - t) {
                 direction++;
-                nx = x + dx[direction];
-                ny = y + dy[direction];
+                continue;
             }
 
+            arr[x][y] = arr[nx][ny]; 
             x = nx;
             y = ny;
         }
 
-        // 그룹 회전 (R만큼 이동)
-        int[] rotatedGroup = new int[perimeter];
-        for (int i = 0; i < perimeter; i++) {
-            rotatedGroup[(i + perimeter - rotationCount) % perimeter] = group[i];
-        }
-
-        // 회전된 값을 다시 배열에 반영
-        x = t;
-        y = t;
-        direction = 0;
-        idx = 0;
-        while (idx < perimeter) {
-            arr[x][y] = rotatedGroup[idx++];
-
-            int nx = x + dx[direction];
-            int ny = y + dy[direction];
-
-            // 범위를 벗어나면 방향 전환
-            if (nx < t || nx >= N - t || ny < t || ny >= M - t) {
-                direction++;
-                nx = x + dx[direction];
-                ny = y + dy[direction];
-            }
-
-            x = nx;
-            y = ny;
-        }
+        arr[t + 1][t] = temp; // 마지막 위치에 저장한 값 대입
     }
 }
