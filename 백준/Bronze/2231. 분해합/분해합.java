@@ -12,9 +12,15 @@ public class Main {
         N = Integer.parseInt(br.readLine());
 
         for(int i=1; i<N; i++){
-            s = Integer.toString(i);
+//            s = Integer.toString(i);
+            int number = i;
+            int sum = 0;
 
-            int sum = Arrays.stream(s.split("")).mapToInt(Integer::parseInt).sum();
+            while(number != 0) {
+                sum += number % 10;	// 각 자릿수 더하기
+                number /= 10;
+            }
+//            int sum = Arrays.stream(s.split("")).mapToInt(Integer::parseInt).sum();
 
             if(i+sum == N){
                 System.out.println(i);
