@@ -14,14 +14,20 @@ public class Main {
         DP[5] = 2;
 
         int T = sc.nextInt();
+
+        // DP 배열을 한 번만 계산
+        for(int i=6; i<=100; i++){
+            DP[i] = DP[i-1] + DP[i-5]; // long 타입으로 계산
+        }
+
         for(int i=0; i<T; i++){
             int N = sc.nextInt();
 
-            for(int j=1; j<=N; j++){
-                if(DP[j] == 0){
-                    DP[j] = DP[j-1] + DP[j-5];
-                }
-            }
+//            for(int j=1; j<=N; j++){
+//                if(DP[j] == 0){
+//                    DP[j] = DP[j-1] + DP[j-5];
+//                }
+//            }
             sb.append(DP[N] + "\n");
         }
 
