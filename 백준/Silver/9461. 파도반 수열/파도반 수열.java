@@ -1,36 +1,34 @@
-import java.util.*;
-
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
+ 
 public class Main {
-    static long[] DP = new long[101];
-
-    public static void main(String[] args) {
-        Scanner sc = new Scanner(System.in);
-        StringBuilder sb = new StringBuilder();
-
-        DP[1] = 1;
-        DP[2] = 1;
-        DP[3] = 1;
-        DP[4] = 2;
-        DP[5] = 2;
-
-        int T = sc.nextInt();
-
-        // DP 배열을 한 번만 계산
-        for(int i=6; i<=100; i++){
-            DP[i] = DP[i-1] + DP[i-5]; // long 타입으로 계산
-        }
-
-        for(int i=0; i<T; i++){
-            int N = sc.nextInt();
-
-//            for(int j=1; j<=N; j++){
-//                if(DP[j] == 0){
-//                    DP[j] = DP[j-1] + DP[j-5];
-//                }
-//            }
-            sb.append(DP[N] + "\n");
-        }
-
-        System.out.println(sb);
-    }
+	
+	public static Long[] seq = new Long[101];
+ 
+	public static void main(String[] args) throws IOException {
+		
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringBuilder sb = new StringBuilder();
+		
+		seq[0] = 0L;
+		seq[1] = 1L;
+		seq[2] = 1L;
+		seq[3] = 1L;
+		
+		int T = Integer.parseInt(br.readLine());
+		
+		while(T-->0) {
+			sb.append(padovan(Integer.parseInt(br.readLine()))).append('\n');
+		}
+		System.out.println(sb);
+	}
+	
+	public static long padovan(int N) {
+		if(seq[N] == null) {
+			seq[N] = padovan(N - 2) + padovan(N - 3);
+		}
+		return seq[N];
+	}
+ 
 }
