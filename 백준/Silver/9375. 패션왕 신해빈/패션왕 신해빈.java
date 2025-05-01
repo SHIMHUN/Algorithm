@@ -14,8 +14,11 @@ public class Main {
             Map<String, Integer> clothes = new HashMap<>();
             int cnt = Integer.parseInt(br.readLine()); //의상 갯수
             for(int j=0; j<cnt; j++){
-                String[] s = br.readLine().split(" ");
-                clothes.put(s[1], clothes.getOrDefault(s[1],0)+1);
+//                String[] s = br.readLine().split(" ");
+                StringTokenizer st = new StringTokenizer(br.readLine()," ");
+                st.nextToken(); //의상 이름은 필요없으므로 건너뜀
+                String s = st.nextToken();
+                clothes.put(s, clothes.getOrDefault(s,0)+1);
             }
 
             int result = 1;
