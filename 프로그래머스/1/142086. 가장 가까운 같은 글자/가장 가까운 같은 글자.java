@@ -1,9 +1,8 @@
 class Solution {
     public int[] solution(String s) {
         int[] result = new int[s.length()];
-        result[0] = -1;
         
-        for(int i=1; i<s.length(); i++){ //배열 원소들을 -1로 초기화
+        for(int i=0; i<s.length(); i++){ //배열 원소들을 -1로 초기화
             result[i] = -1;
         }
         
