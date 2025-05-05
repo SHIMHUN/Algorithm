@@ -2,7 +2,7 @@ import java.util.*;
 
 
 class Solution {
-    static HashSet<Integer> set = new HashSet<>();
+    static HashSet<Integer> set = new HashSet();
 
     public Integer[] solution(int[] numbers) {
         
@@ -12,10 +12,8 @@ class Solution {
             }
         }
         
-        Integer[] arr = set.toArray(new Integer[0]);
+        Integer[] arr = set.toArray(Integer[]::new);
         Arrays.sort(arr);
         return arr;
-        // int[] answer = {};
-        // return answer;
     }
 }
