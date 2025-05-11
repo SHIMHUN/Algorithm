@@ -1,20 +1,22 @@
 class Solution {
-
     public int solution(int number, int limit, int power) {
-        int[] count = new int[number + 1];    
-        for (int i = 1; i <= number; i++) {
-            for (int j = 1; j <= number / i; j++) {
-                count[i * j]++;
-            }
-        }
         int answer = 0;
-        for (int i = 1; i <= number; i++) {
-            if (count[i] > limit) {
+        for(int i=1; i<=number; i++){
+            int a = count(i);
+            if(a>limit){
                 answer += power;
-            } else {
-                answer += count[i];
+            }else{
+                answer += a;
             }
         }
         return answer;
+    }
+    public int count(int N){
+        int count = 0;
+        for (int i = 1; i * i <= N; i++) {
+            if (i * i == N) count++;
+            else if (N % i == 0) count += 2;
+        }
+        return count;
     }
 }
