@@ -9,17 +9,6 @@ class Solution {
             set.add(num);
         }
         
-        int answer = 0;
-        int num = nums.length/2;
-        int size = set.size();
-        
-        if(size >= num){
-            answer = num;
-        }else{
-            answer = size;   
-        }
-        
-        return answer;
-        // return 0;
+        return (set.size() >= nums.length/2)? nums.length/2 : set.size();
     }
 }
