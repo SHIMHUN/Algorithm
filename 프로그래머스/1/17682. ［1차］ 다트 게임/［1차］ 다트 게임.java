@@ -1,62 +1,40 @@
-import java.util.Stack;
-
+import java.util.*;
 class Solution {
     public int solution(String dartResult) {
-        int answer = 0;
-        int len = dartResult.length();
-        
-        Stack<Integer> stack = new Stack<>();//스택 선언
-        
-        for(int i=0; i<len; i++	) {
-        	String s = ""+dartResult.charAt(i);
-        	
-        	if(s.matches("^[0-9]")) { //0~9점 사이일때
-        		String num = s;
-        		if(i<len-1 && dartResult.charAt(i+1)=='0') {
-        			num += dartResult.charAt(i+1);
-        			i++;
-        		}
-        		stack.push(Integer.parseInt(num));
-        	}
-        	else if(s.matches("[D,T]")) {
-        		if(!s.isEmpty()) {
-        			int num = stack.pop();
-        			if(s.equals("D")) {
-        				num = (int) Math.pow(num, 2);
-        			}else {
-        				num = (int) Math.pow(num, 3);
-        			}
-        			stack.push(num);
-        		}
-        	}
-        	else if(s.matches("[*]")) {
-        		int time =2;
-        		if(stack.size()==1) {
-        			int num = stack.pop();
-        			num *= 2;
-        			stack.push(num);
-        		}else {
-        			int num1 = stack.pop();
-        			int num2 = stack.pop();
-        			num1 *= 2;
-        			num2 *= 2;
-        		
-        			stack.push(num2);
-        			stack.push(num1);
-        		}
-        	}
-        	else if(s.matches("[#]")) {
-        		if(!stack.isEmpty()) {
-        			int num = stack.pop();
-        			num *= -1;
-        			stack.push(num);
-        		}
-        	}
+        Stack<Integer> stack = new Stack<>();
+        int sum = 0;
+        for (int i = 0; i < dartResult.length(); ++i) {
+            char c = dartResult.charAt(i);
+            if (Character.isDigit(c)) {
+                sum = (c - '0');
+                if (sum == 1 && i < dartResult.length() - 1 && dartResult.charAt(i + 1) == '0') {
+                    sum = 10;
+                    i++;
+                }
+                stack.push(sum);
+            } else {
+                int prev = stack.pop();
+                if (c == 'D') {
+                    prev *= prev;
+                } else if (c == 'T') {
+                    prev = prev * prev * prev;
+                } else if (c == '*') {
+                    if (!stack.isEmpty()) {
+                        int val = stack.pop() * 2;
+                        stack.push(val);
+                    }
+                    prev *= 2;
+                } else if (c == '#') {
+                    prev *= (-1);
+                }
+                // System.out.println(prev);
+                stack.push(prev);
+            }
         }
-        
-        while(!stack.isEmpty()) {
-        	answer += stack.pop();
+        int totalScore = 0;
+        while (!stack.isEmpty()) {
+            totalScore += stack.pop();
         }
-        return answer;
+        return totalScore;
     }
 }
