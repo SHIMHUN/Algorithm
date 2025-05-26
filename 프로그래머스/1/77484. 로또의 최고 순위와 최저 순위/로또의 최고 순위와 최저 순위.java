@@ -3,8 +3,6 @@ import java.util.*;
 class Solution {
     public int[] solution(int[] lottos, int[] win_nums) {
         int[] answer = new int[2];
-        Arrays.sort(lottos);
-        Arrays.sort(win_nums);
         
         int cnt=0;
         int score=0;
@@ -26,11 +24,6 @@ class Solution {
         int max_score = score + cnt;
         int min_score = score;
         
-        System.out.println("max_score: " + max_score);
-        System.out.println("min_score: " + min_score);
-        
-        // answer[0] = 6-max_score+1;
-        // answer[1] = 6-min_score+1;
         answer[0] = getRank(max_score);
         answer[1] = getRank(min_score);
         return answer;
