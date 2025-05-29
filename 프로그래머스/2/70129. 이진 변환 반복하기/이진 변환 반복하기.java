@@ -1,34 +1,40 @@
 class Solution {
     public int[] solution(String s) {
         int[] answer = new int[2];
-        int remove_cnt = 0;
-        int loop_cnt = 0;
+        int removeCnt = 0;
+        int loopCnt = 0;
 
         //이진 변환 루프
         while(!s.equals("1")){
-            int before = s.length();
+            int lenBefore = s.length();
             s=s.replace("0","");
-            int after = s.length();
+            int lenAfter = s.length();
             
             //제거된 0의 갯수 갱신
-            remove_cnt += (before - after);
+            removeCnt += (lenBefore - lenAfter);
             
             int cnt=0;
+            
+            
+            //이진 변환 코드는 Java에서 API를 제공함
+            // s=Integer.toBinaryString(after);
+            
             String temp = "";
-            while(after>1){
+            while(lenAfter>1){
                 
-                temp = (after%2) + temp;
-                after/=2;
+                temp = (lenAfter%2) + temp;
+                lenAfter/=2;
                 
                 cnt++;
             }
             
             s= "1"+temp;
-            loop_cnt++;
+            
+            loopCnt++;
         }
         
-        answer[0] = loop_cnt;
-        answer[1] = remove_cnt;
+        answer[0] = loopCnt;
+        answer[1] = removeCnt;
         return answer;
     }
 }
