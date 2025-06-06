@@ -8,8 +8,12 @@ class Solution {
         
         // map에 저장
         for(int fruit : tangerine){
-            map.putIfAbsent(fruit, 0);
-            map.put(fruit, map.get(fruit)+1);
+            // map.putIfAbsent(fruit, 0);
+            // map.put(fruit, map.get(fruit)+1);
+            
+            // fruit이 key로 저장되어있지 않으면 0, 저장되어있으면 기존 값에 +1
+            map.put(fruit, map.getOrDefault(fruit,0) + 1);
+            
         }
         
         // value 기준으로 내림차순 정렬
