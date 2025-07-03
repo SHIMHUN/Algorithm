@@ -24,12 +24,11 @@ class Solution {
             // 원하는 수량을 살 수 있는지 검사
             boolean check = true;
             for (String key : product.keySet()) {
-                if (map.getOrDefault(key, 0) != product.get(key)) {
+                if (map.getOrDefault(key, 0) != product.get(key)) { //product에는 있지만 map에는 없는 경우 고려(할인 품목이 아님)
                     check = false;
                     break;
                 }
             }
-            // System.out.println(check);
             if(check){
                 result++;
             }
