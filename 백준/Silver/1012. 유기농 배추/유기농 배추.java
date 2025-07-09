@@ -18,7 +18,7 @@ public class Main {
 
             if (nx >= 0 && nx < M && ny >= 0 && ny < N) { // 배추 밭 범위 안에 있는지 확인
                 if (field[nx][ny] == 1 && !visited[nx][ny]) { // 현재 위치가 배추가 심어진 곳이지만 아직 방문 x
-                    dfs(nx, ny);
+                    dfs(nx, ny); // 그 주변을 계속 탐색
                 }
             }
         }
@@ -26,22 +26,22 @@ public class Main {
 
     public static void bfs(int x, int y) {
         Queue<int[]> q = new LinkedList<>();
-        q.offer(new int[]{x, y});
-        visited[x][y] = true;
+        q.offer(new int[]{x, y}); // 먼저 시작 위치를 큐에 담는다
+        visited[x][y] = true; // 해당 위치 방문 처리
 
         while (!q.isEmpty()) {
-            int[] now = q.poll();
-            int cx = now[0];
-            int cy = now[1];
+            int[] now = q.poll(); // 큐에 있는 좌표를 하나 꺼내서 현재 위치로 설정
+            int new_x = now[0];
+            int new_y = now[1];
 
-            for (int dir = 0; dir < 4; dir++) {
-                int nx = cx + dx[dir];
-                int ny = cy + dy[dir];
+            for (int i = 0; i < 4; i++) { // 상하좌우 4방향 확인
+                int nx = new_x + dx[i];
+                int ny = new_y + dy[i];
 
                 if (nx >= 0 && nx < M && ny >= 0 && ny < N) {
-                    if (field[nx][ny] == 1 && !visited[nx][ny]) {
-                        visited[nx][ny] = true;
-                        q.offer(new int[]{nx, ny});
+                    if (field[nx][ny] == 1 && !visited[nx][ny]) { // 현재 위치가 배추가 심어진 곳이지만 아직 방문 x
+                        visited[nx][ny] = true; // 방문처리하고 좌표를 큐에 넣음
+                        q.offer(new int[]{nx, ny}); // 큐에 넣는 이유? 해당 좌표를 방문하고 이 좌표를 기준으로 탐색하기 위해서
                     }
                 }
             }
