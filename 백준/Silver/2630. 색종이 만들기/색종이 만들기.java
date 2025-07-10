@@ -2,16 +2,15 @@
 // click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
 
 import java.io.*;
-import java.util.*;
 
 public class Main {
     static int[][] square;
-    static int N, white=0, blue=0;
+    static int white=0, blue=0;
 
 
     public static void main(String[] args) throws IOException{
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        N = Integer.parseInt(br.readLine());
+        int N = Integer.parseInt(br.readLine());
         square = new int[N][N];
 
         // 초기 2차원 배열 세팅
@@ -29,45 +28,32 @@ public class Main {
 
     public static void check(int x, int y, int n){
 
-        boolean isWhite = true;
-        boolean isBlue = true;
+        boolean isSame = true;
+        int color = square[x][y]; // 시작 원소를 기준점으로 잡는다
 
-        // 전체 색칠되있거나 안칠해져있는지 확인
-        loop1:
         for(int i=x; i<x+n; i++){
             for(int j=y; j<y+n; j++){
-                if(square[i][j] != 0){
-                    isWhite=false;
-                    break loop1;
+                if(square[i][j] != color){
+                    isSame=false;
+                    break;
                 }
             }
         }
 
-        if(isWhite == true) {
-            white++;
-            return;
-        }
-
-        loop2:
-        for(int i=x; i<x+n; i++){
-            for(int j=y; j<y+n; j++){
-                if(square[i][j] != 1){
-                    isBlue=false;
-                    break loop2;
-                }
+        if(isSame == true){
+            if(color == 1){
+                blue++;
+            }else{
+                white++;
             }
-        }
-
-        if(isBlue==true){
-            blue++;
             return;
         }
 
-        int length = n/2;
+        n /= 2;
 
-        check(x, y, length);
-        check(x+length, y, length);
-        check(x, y+length, length);
-        check(x+length, y+length, length);
+        check(x, y, n);
+        check(x+n, y, n);
+        check(x, y+n, n);
+        check(x+n, y+n, n);
     }
 }
