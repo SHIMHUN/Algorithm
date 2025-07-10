@@ -1,6 +1,3 @@
-//TIP To <b>Run</b> code, press <shortcut actionId="Run"/> or
-// click the <icon src="AllIcons.Actions.Execute"/> icon in the gutter.
-
 import java.io.*;
 
 public class Main {
@@ -30,12 +27,13 @@ public class Main {
 
         boolean isSame = true;
         int color = square[x][y]; // 시작 원소를 기준점으로 잡는다
-
+        
+        loop:
         for(int i=x; i<x+n; i++){
             for(int j=y; j<y+n; j++){
                 if(square[i][j] != color){
                     isSame=false;
-                    break;
+                    break loop;
                 }
             }
         }
