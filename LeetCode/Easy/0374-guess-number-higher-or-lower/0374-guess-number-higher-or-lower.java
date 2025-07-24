@@ -27,6 +27,6 @@ public class Solution extends GuessGame {
             }
         }
         
-        return right;
+        return -1;
     }
 }
