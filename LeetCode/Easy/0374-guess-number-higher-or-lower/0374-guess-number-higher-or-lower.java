@@ -16,10 +16,11 @@ public class Solution extends GuessGame {
 
         while(left <= right){
             int mid = left + (right-left)/2;
+            int guess = guess(mid);
 
-            if(guess(mid) == -1){ // down해야함
+            if(guess == -1){ // down해야함
                 right = mid - 1;
-            }else if(guess(mid) == 1){  // up해야함
+            }else if(guess == 1){  // up해야함
                 left = mid + 1;
             }else{
                 return mid;
