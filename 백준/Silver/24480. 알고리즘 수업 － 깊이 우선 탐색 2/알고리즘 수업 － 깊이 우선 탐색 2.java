@@ -2,7 +2,7 @@ import java.io.*;
 import java.util.*;
 
 public class Main {
-    static List<List<Integer>> graph = new ArrayList<>();
+    static List<PriorityQueue<Integer>> graph = new ArrayList<>();
     static boolean[] visited;
     static int N, M, R, count=1;
     static int[] result;
@@ -19,7 +19,7 @@ public class Main {
         result = new int[N+1];
 
         for(int i=0; i<=N; i++){
-            graph.add(new ArrayList<>());
+            graph.add(new PriorityQueue<>(Collections.reverseOrder()));
         }
 
         for(int i=1; i<=M; i++){
@@ -44,12 +44,19 @@ public class Main {
     public static void dfs(int curr){
         visited[curr] = true;
         result[curr] = count++;
-        Collections.sort(graph.get(curr), Collections.reverseOrder()); //역순 재정렬
-
-        for(int next :graph.get(curr)){
-            if(!visited[next]){
+//        Collections.sort(graph.get(curr), Collections.reverseOrder()); //역순 재정렬
+        PriorityQueue<Integer> pq = graph.get(curr);
+        while (!pq.isEmpty()) {
+            int next = pq.poll();
+            if (!visited[next]) {
                 dfs(next);
             }
         }
+
+//        for(int next :graph.get(curr)){
+//            if(!visited[next]){
+//                dfs(next);
+//            }
+//        }
     }
 }
