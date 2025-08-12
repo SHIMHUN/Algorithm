@@ -27,22 +27,12 @@ public class Main {
 
             graph[x][y] = 1;
         }
-
-//        for(int[] arr : graph){
-//            for(int a : arr){
-//                System.out.print(a + " ");
-//            }
-//            System.out.println();
-//        }
-
-
+        
         for(int i=1; i<=N; i++){
             for(int j=1; j<=M; j++){
                 if(!visited[i][j] && graph[i][j] == 1){
-//                    int foodSize = dfs(i, j);
-//                    System.out.println("i: " + i + "j: " + j + "foodSize: " + foodSize);
-//                    maxFoodSize = Math.max(dfs(i, j), maxFoodSize);
-                    maxFoodSize = Math.max(bfs(i, j), maxFoodSize);
+                    maxFoodSize = Math.max(dfs(i, j), maxFoodSize);
+//                    maxFoodSize = Math.max(bfs(i, j), maxFoodSize);
 
                 }
             }
