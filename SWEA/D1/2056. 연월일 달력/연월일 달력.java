@@ -26,15 +26,15 @@ class Solution
         for(int i=1; i<=T; i++){
         	String s = br.readLine();
 			
-            String year = s.substring(0, 4);
+            String year = s.substring(0,4);
             String month = s.substring(4,6);
             String day = s.substring(6,8);
             
             if(!checkMonth(Integer.parseInt(month))){
-                sb.append("#"+i +" "+-1+"\n");
+                sb.append("#"+i +" -1"+"\n");
             	continue;
             }if(!checkDay(Integer.parseInt(month), Integer.parseInt(day))) {
-            	sb.append("#"+i +" "+-1+"\n");
+            	sb.append("#"+i +" -1"+"\n");
             	continue;
             }
 
