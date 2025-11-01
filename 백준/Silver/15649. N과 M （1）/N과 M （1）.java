@@ -14,7 +14,7 @@ public class Main {
         N = Integer.parseInt(st.nextToken());
         M = Integer.parseInt(st.nextToken());
 
-        arr = new int[N];
+        arr = new int[M];
         isUsed = new boolean[N+1];
 
         dfs(0);
