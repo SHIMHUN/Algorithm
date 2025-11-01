@@ -8,7 +8,7 @@ public class Main {
 
         int n = Integer.parseInt(br.readLine());
 
-        Set<String> set = new HashSet<>();
+        Set<String> set = new TreeSet<>(Collections.reverseOrder());
 
         while(n-- > 0){
             String[] s = br.readLine().split(" ");
@@ -16,10 +16,13 @@ public class Main {
             else set.remove(s[0]);
         }
 
-        List<String> al = new ArrayList<>(set);
-        Collections.sort(al, Collections.reverseOrder());
-
-        for(String s : al){
+//        List<String> al = new ArrayList<>(set);
+//        Collections.sort(al, Collections.reverseOrder());
+//
+//        for(String s : al){
+//            sb.append(s).append("\n");
+//        }
+        for(String s : set){
             sb.append(s).append("\n");
         }
 
