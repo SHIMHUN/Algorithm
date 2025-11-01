@@ -25,11 +25,11 @@ public class Main {
 //        for(String s : al){
 //            sb.append(s).append("\n");
 //        }
-//        for(String s : set){
-//            sb.append(s).append("\n");
-//        }
+        for(String s : set){
+            sb.append(s).append("\n");
+        }
 
-        set.forEach(s -> sb.append(s).append("\n"));
+//        set.forEach(s -> sb.append(s).append("\n"));
         System.out.print(sb);
     }
 }
