@@ -10,16 +10,18 @@ class Solution {
         }
         
         
-        Arrays.sort(arr, (a,b) -> (b+a).compareTo(a+b));
+        Arrays.sort(arr, (b,a) -> (a+b).compareTo(b+a));
         
         
         if(arr[0].equals("0")) return "0";
         
+        
+        StringBuilder sb = new StringBuilder();
+        
         for(String s : arr){
-            answer+=s;
+            sb.append(s);
         }
         
-        return answer;
-        // String.valueOf()
+        return sb.toString();
     }
 }
